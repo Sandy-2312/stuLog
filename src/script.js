@@ -17,7 +17,7 @@ window.addEventListener("click", (e) => {
 });
 
 //Hide add form on clicking Add button
-addBtn.addEventListener("click", (e) => {
+addBtn.addEventListener("click", () => {
   dropDown.classList.add("hidden");
 });
 
@@ -147,9 +147,18 @@ SaveEditBtn.addEventListener("click", () => {
     localStorage.setItem("students", JSON.stringify(studentList));       //Save to localStorage
     renderTable();                                                       //Render updated table
 
-    //Scroll to the updated student's row after change is submitted
-    const studentRow = document.getElementById(currentStudentEditID);    //Getting element by current id of data being updated
-    studentRow.scrollIntoView({ behavior: "smooth", block: "center" });  //Scroll into view of target id, while showing the scrool smoothly and keeping the target id element at center of screen view on reaching
+    const studentRow = document.getElementById(currentStudentEditID);       //Getting element by current id of data being updated
+    if (studentRow) {             
+      
+      //Scrolling into view of target id, while showing the scrool smoothly and keeping the target id element at center of screen view on reaching                                        
+      studentRow.scrollIntoView({ behavior: "smooth", block: "center" }); 
+
+      //Highlighting the target row and removing highlight after waiting for 800 ms  
+      studentRow.style.backgroundColor = "#99a1af";
+      setTimeout(() => {
+        studentRow.style.backgroundColor = "";   
+      }, 800);
+    }
   }
 
 });
